@@ -1,0 +1,11 @@
+
+workspace ‘OpenCViOSTest.xcworkspace'
+platform :ios, ’8.0’
+inhibit_all_warnings!
+use_frameworks!
+
+target "OpenCViOSTest" do
+ #pod 'OpenCV', '~> 3.2.0'
+ #pod 'Masonry', '~> 1.0.2'
+ #pod 'DBCamera', '~> 2.4.1'
+end

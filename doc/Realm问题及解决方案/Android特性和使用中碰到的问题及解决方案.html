@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Realm数据库</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>Realm数据库</h1>
+<h2>1. Realm简介</h2>
+<p>Realm 是一个 MVCC （多版本并发控制）数据库，由Y Combinator公司在2014年7月发布一款支持运行在手机、平板和可穿戴设备上的嵌入式数据库，目标是取代SQLite。</p>
+<p>Realm 本质上是一个嵌入式数据库，他并不是基于SQLite所构建的。它拥有自己的数据库存储引擎，可以高效且快速地完成数据库的构建操作。和SQLite不同，它允许你在持久层直接和数据对象工作。在它之上是一个函数式风格的查询api，众多的努力让它比传统的SQLite 操作更快 。</p>
+<h2>2. 优势</h2>
+<ul>
+<li>
+<p>易用</p>
+<p>Ream 不是在SQLite基础上的ORM，它有自己的数据查询引擎。并且十分容易使用。</p>
+</li>
+<li>
+<p>快速</p>
+<p>由于它是完全重新开始开发的数据库实现，所以它比任何的ORM速度都快很多，甚至比SLite速度都要快。</p>
+</li>
+<li>
+<p>跨平台</p>
+<p>Realm 支持 iOS &amp; OS X (Objective‑C &amp; Swift) &amp; Android。我们可以在这些平台上共享Realm数据库文件，并且上层逻辑可以不用任何改动的情况下实现移植。</p>
+</li>
+<li>
+<p>高级</p>
+<p>Ream支持加密，格式化查询，易于移植，支持JSON，流式api，数据变更通知等高级特性</p>
+</li>
+<li>
+<p>可视化</p>
+<p>Realm 还提供了一个轻量级的数据库查看工具：Realm Studio，开发者可以查看数据库当中的内容，执行简单的插入和删除数据的操作。</p>
+</li>
+</ul>
+<h2>3. 使用方式</h2>
+<ul>
+<li>
+<p>添加依赖</p>
+<p>在project的build.gradle中</p>
+<p><img src="https://raw.githubusercontent.com/MiloHwb/MyPostImage/master/Realm%E6%95%B0%E6%8D%AE%E5%BA%93/1.png" /></p>
+<p>在Application的build.gragle中</p>
+<p><img src="https://raw.githubusercontent.com/MiloHwb/MyPostImage/master/Realm%E6%95%B0%E6%8D%AE%E5%BA%93/2.png" /></p>
+<p><img src="https://raw.githubusercontent.com/MiloHwb/MyPostImage/master/Realm%E6%95%B0%E6%8D%AE%E5%BA%93/3.png" /></p>
+</li>
+<li>
+<p>初始化Realm</p>
+<p>在 Applaction 的 onCreate() 方法中使用 Realm.init() 初始化</p>
+<p><img src="https://raw.githubusercontent.com/MiloHwb/MyPostImage/master/Realm%E6%95%B0%E6%8D%AE%E5%BA%93/4.png" /></p>
+<p>使用图上配置会创建一个 REALM_NAME.realm 的 Realm 文件，一般来说这个文件位于 data/data/包名/files 目录下，通过 realm.getPath 来获得该 Realm 的绝对路径</p>
+</li>
+<li>
+<p>在Activity中具体使用</p>
+<p><img src="https://raw.githubusercontent.com/MiloHwb/MyPostImage/master/Realm%E6%95%B0%E6%8D%AE%E5%BA%93/5.png" /></p>
+<p>在使用完后在 onDestory() 方法中进行关闭</p>
+<p><img src="https://raw.githubusercontent.com/MiloHwb/MyPostImage/master/Realm%E6%95%B0%E6%8D%AE%E5%BA%93/6.png" /></p>
+</li>
+<li>
+<p>创建model类</p>
+<p>model类的创建方式有两种：</p>
+<ol>
+<li>继承<code>RealmObject</code></li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/MiloHwb/MyPostImage/master/Realm%E6%95%B0%E6%8D%AE%E5%BA%93/7.png" /></p>
+<ol>
+<li>实现<code>RealmModel</code>并添加<code>@RealmClass</code>修饰符</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/MiloHwb/MyPostImage/master/Realm%E6%95%B0%E6%8D%AE%E5%BA%93/8.png" /></p>
+<ul>
+<li>支持的属性</li>
+</ul>
+<p><code>boolean</code>, <code>byte</code>, <code>short</code>,<code>int</code>,<code>long</code>,<code>float</code>, <code>double</code>,<code>String</code>, <code>Date</code> 和<code>byte[]</code>, <code>RealmObject</code>, <code>RealmList&lt;? extends RealmObject&gt;</code></p>
+<p>还支持<code>Boolean</code>, <code>Byte</code>, <code>Short</code>, <code>Integer</code>, <code>Long</code>, <code>Float</code> 和 <code>Double</code></p>
+<p><strong>Tip</strong>：整数类型 <code>short</code>、<code>int</code> 和 <code>long</code> 都被映射到 Realm 内的相同类型（实际上为 <code>long</code> ）</p>
+<ul>
+<li><code>@PrimaryKey</code>——表示该字段是主键</li>
+</ul>
+<p>字段类型必须是字符串（<code>String</code>）或整数（<code>byte</code>，<code>short</code>，<code>int</code>或<code>long</code>）以及它们的包装类型（<code>Byte</code>,<code>Short</code>, <code>Integer</code>, 或 <code>Long</code>）。不可以存在多个主键，使用字符串字段作为主键意味着字段被索引（注释<code>@PrimaryKey</code>隐式地设置注释<code>@Index</code>）。</p>
+<ul>
+<li><code>@Required</code>——表示该字段非空</li>
+</ul>
+<p>在某些情况下，有一些属性是不能为<code>null</code>的。使用@Required可用于用于强行要求其属性不能为空，<code>只能用于Boolean</code>, <code>Byte</code>, <code>Short</code>, <code>Integer</code>, <code>Long</code>, <code>Float</code>, <code>Double</code>, <code>String</code>, <code>byte[]</code> 和 <code>Date</code>。在其它类型属性上使用 <code>@Required</code>修饰会导致编译失败。</p>
+<p><strong>Tip：</strong>基本数据类型不需要使用注解 <code>@Required</code>，因为他们本身就不可为空。</p>
+<ul>
+<li><code>@Ignore</code>——表示忽略该字段</li>
+</ul>
+<p>被添加<code>@Ignore</code>标签后，存储数据时会忽略该字段。</p>
+<ul>
+<li><code>@Index</code>——添加搜索索引</li>
+</ul>
+<p>为字段添加搜索索引，这样会使得插入的速度变慢，数据量也变得更大。不过在查询速度将变得更快，建议只在优化读取性能的特定情况时添加索引。支持索引：<code>String</code>，<code>byte</code>，<code>short</code>，<code>int</code>，<code>long</code>，<code>boolean</code>和<code>Date</code>字段。</p>
+</li>
+</ul>
+<h2>结合RxJava使用</h2>
+<p>RxJava是一个在 Java VM 上使用可观测的序列来组成异步的、基于事件的程序的库。</p>
+<p>Realm包含了对RxJava的原生支持。</p>
+<p><img src="https://raw.githubusercontent.com/MiloHwb/MyPostImage/master/Realm%E6%95%B0%E6%8D%AE%E5%BA%93/9.png" /></p>
+<p>这里使用<code>asFlowable</code>轻松转换成RxJava中的<code>Flowable</code>，之后可以使用RxJava中的特性，流式编程，使代码更简洁，逻辑更清晰。</p>
+<h2>结合Kotlin使用</h2>
+<p>Realm完全兼容Kotlin语言，但有些地方需要注意：</p>
+<ul>
+<li>Model需要时开放的（<code>open</code>）</li>
+<li>很多RealmApi引用了Java类。你必须在编译一栏中添加 <code>org.jetbrains.kotlin:kotlin-reflect:$kotlin_version</code>。</li>
+</ul>
+<h2>踩坑指南</h2>
+<ol>
+<li>
+<p>使用Gson作为Json解析框架的时候，继承RealmObject的类序列化和反序列化的时候需排除RealmObject中的属性，否则将因为类RealmObject涉及父子轮调，导致死循环</p>
+<p>解决方法：使用ExclusionStrategy（排除策略）实现对类或者域的序列化排除</p>
+<p><img src="https://raw.githubusercontent.com/MiloHwb/MyPostImage/master/Realm%E6%95%B0%E6%8D%AE%E5%BA%93/10.png" /></p>
+</li>
+<li>
+<p>Realm数据自动更新。Realm查找到数据后如果数据发生了改变，会直接修改我们查找到的对象中的数据，但在EQS的开发过程中会导致原生与H5之间不断的进行无效的交互。</p>
+<p>解决方法：使用firstElement实现只取一次数据。</p>
+<p><img src="https://raw.githubusercontent.com/MiloHwb/MyPostImage/master/Realm%E6%95%B0%E6%8D%AE%E5%BA%93/11.png" /></p>
+</li>
+<li>
+<p>在获取到Realm实例的时候注意<code>Realm.getDefaultInstance()</code>这个方法，每调用一次这个方法会在当前线程中创建一个新的Realm对象，导致内存占用过大。</p>
+<p>解决方法：使用RealmManager管理当前Realm对象，保证一个线程中只存在一个Realm对象。</p>
+<p><img src="https://raw.githubusercontent.com/MiloHwb/MyPostImage/master/Realm%E6%95%B0%E6%8D%AE%E5%BA%93/12.png" /></p>
+<p><img src="https://raw.githubusercontent.com/MiloHwb/MyPostImage/master/Realm%E6%95%B0%E6%8D%AE%E5%BA%93/13.png" /></p>
+<p><img src="https://raw.githubusercontent.com/MiloHwb/MyPostImage/master/Realm%E6%95%B0%E6%8D%AE%E5%BA%93/14.png" /></p>
+</li>
+</ol>
+<h2>总结</h2>
+<p>Realm主要有两个优点：</p>
+<ul>
+<li>对象就是表，属性就是字段，不需要额外的设置（相比GreenDao更简单）。</li>
+<li>相比其他移动端数据库框架，性能更加卓越，存取速度很快。</li>
+</ul>
+<p>Realm也有两个缺点：</p>
+<ul>
+<li>不支持继承父类对象，所有Realm类都必须继承RealmObject（或者实现RealmModel接口）</li>
+<li>realm对象只能在创建的线程使用，不允许跨线程访问realm对象。</li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
